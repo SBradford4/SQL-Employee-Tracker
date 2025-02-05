@@ -2,14 +2,18 @@
 DROP DATABASE IF EXISTS company_db;
 CREATE DATABASE company_db;
 \c company_db;
+-- See database in use --
+SELECT current_database();
+
+
 
 CREATE TABLE department (
-    id SERIAL PRIMARY KEY,
+    id INTEGER NOT Null Auto_INCREMENT PRIMARY KEY,
     name VARCHAR(30) UNIQUE NOT NULL
     );
 
     CREATE TABLE role (
-    id SERIAL PRIMARY KEY,
+    id INTEGER NOT NULL Auto_INCREMENT PRIMARY KEY,
     title VARCHAR(30) UNIQUE NOT NULL,
     salary DECIMAL NOT NULL,
     department_id INTEGER NOT NULL,
@@ -17,7 +21,7 @@ CREATE TABLE department (
     );
 
     CREATE TABLE employee (
-    id SERIAL PRIMARY KEY,
+    id INTEGER NOT NULL Auto_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INTEGER NOT NULL,
