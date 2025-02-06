@@ -29,33 +29,33 @@ import { pool } from './connection.js';
     }
 
     async findAllDepartments() {
-        return this.query("SELECT department.id, department.name;");
+        return this.query("SELECT department.id, department.name from department;");
     }
 
     async createRole(role: any) {
         const { title, salary, department} =
         role;
-        return this.query('INSERT INTO role (title, salary, department) VALUES ($1, $2, $3)',
-        [title, salary, department_id, department_name]
+        return this.query('INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3) RETURNING *;',
+        [title, salary, department]
         );
     }
 
     async createEmployee(employee: any) {
         const { first_name, last_name, role_id, manager_id } = employee;
-        return this.query('INSERT INTO employee ( first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)', [first_name, last_name, role_id, manager_id]
-
+        return this.query('INSERT INTO employee ( first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4) RETURNING *;', [first_name, last_name, role_id, manager_id]
         );
     }
 
-    async createDepartment(department: any) {
-        const {department_id, department_name} =
-        department;
-        return this.query('INSERT INTO department ( department_name, department_id) VALUES ($1, $2)',
-        [department_id, department_name]
+    async updateEmployee(employeeId: any, roleId: any) {
+        return this.query('UPDATE employee SET role_id = $1 WHERE id = $2 RETURNING *;', [roleId, employeeId]
         );
     }
 
-
+    async createDepartment(department_name: any) {
+        return this.query('INSERT INTO department (name) VALUES ($1) RETURNING *;',
+        [department_name]
+        );
+    }
 
 }
 

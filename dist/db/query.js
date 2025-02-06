@@ -22,19 +22,21 @@ class DB {
         return this.query("SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id; ");
     }
     async findAllDepartments() {
-        return this.query("SELECT department.id, department.name;");
+        return this.query("SELECT department.id, department.name from department;");
     }
     async createRole(role) {
         const { title, salary, department } = role;
-        return this.query('INSERT INTO role (title, salary, department) VALUES ($1, $2, $3)', [title, salary, department_id, department_name]);
+        return this.query('INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3) RETURNING *;', [title, salary, department]);
     }
     async createEmployee(employee) {
         const { first_name, last_name, role_id, manager_id } = employee;
-        return this.query('INSERT INTO employee ( first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)', [first_name, last_name, role_id, manager_id]);
+        return this.query('INSERT INTO employee ( first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4) RETURNING *;', [first_name, last_name, role_id, manager_id]);
     }
-    async createDepartment(department) {
-        const { department_id, department_name } = department;
-        return this.query('INSERT INTO department ( department_name, department_id) VALUES ($1, $2)', [department_id, department_name]);
+    async updateEmployee(employeeId, roleId) {
+        return this.query('UPDATE employee SET role_id = $1 WHERE id = $2 RETURNING *;', [roleId, employeeId]);
+    }
+    async createDepartment(department_name) {
+        return this.query('INSERT INTO department (name) VALUES ($1) RETURNING *;', [department_name]);
     }
 }
 export default new DB();
