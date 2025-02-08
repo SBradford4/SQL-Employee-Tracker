@@ -17,9 +17,6 @@ const mainMenu = async () => {
                     'Add an Employee',
                     'Add a Manager',
                     'Update an employee role',
-                    'View employees by Manager',
-                    'View employees by department',
-                    'View the total utilized budget of a department',
                     'EXIT'
                 ]
             }
@@ -49,19 +46,7 @@ const mainMenu = async () => {
             case "Update an employee role":
                 await updateanEmployeeRole();
                 break;
-            case "View employees by Manager":
-                await viewEmployeesByManager();
-                break;
-            case "View employees by department":
-                await viewEmployeesByDepartment();
-                break;
-            case "Delete department | roles | employees":
-                await deleteDepartment; //roles employees
-                break;
-            case "View the total utilized budget of a department":
-                await viewTotalUtilizedBudgetofDepartment();
-                break;
-            case 'Exit':
+                case 'Exit':                                           
                 console.log("Goodbye!");
                 process.exit();
         }

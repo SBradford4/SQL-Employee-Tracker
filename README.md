@@ -72,4 +72,4 @@ Name: Shelia Bradford
 GitHub: [https://github.com/SBradford4/](https://github.com/SBradford4/)
 
 ### Links
-- Walk Through Video Link:
+- Walk Through Video Link: https://app.screencastify.com/v2/manage/videos/NdCEAt22n8oeAN7xSgfy
